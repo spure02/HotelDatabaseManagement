@@ -342,7 +342,7 @@ public class DBProject {
         System.out.print("Enter the date of birth of the customer in the format MM/DD/YY: ");
         try {
           dateofbirth = in.readLine();
-          if(lastname.length() <= 0) {
+          if(dateofbirth.length() <= 0) {
             throw new RuntimeException("Invalid input");
           }
           break;
@@ -546,61 +546,162 @@ public class DBProject {
   //CHOICE 5 - DONE
    public static void bookRoom(DBProject esql){
     // Given hotelID, roomNo and customer Name create a booking in the DB 
-      // Your code goes here.
-      // ...
-      // ...
 
     try {
-      System.out.println("\tBOOK A ROOM");
+      int bookingid;
+      int customerid;
+      int hotelid;
+      int roomnum;
+      String firstname;
+      String lastname;
+      String bookingdate;
+      int partypeople;
+      int price;
 
-      System.out.print("Enter the hotelID: ");
-      String hotelid = in.readLine();
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "              BOOK A ROOM                     \n" +
+         "*******************************************************\n");
 
-      System.out.print("Enter the room number: ");
-      String roomnum = in.readLine();
+      //hotelid validation
+      do {
+        System.out.print("Enter the hotelID: ");
+        try {
+          hotelid = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the customer's first name: ");
-      String firstname = in.readLine();
+      //room number validation
+      do {
+        System.out.print("Enter the room number: ");
+        try {
+          roomnum = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the customer's last name: ");
-      String lastname = in.readLine();
+      //first name validation
+      do {
+        System.out.print("Enter the first name of the customer: ");
+        try {
+          firstname = in.readLine();
+          if(firstname.length() <= 0 || firstname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the date of the booking in the format MM/DD/YY: ");
-      String bookingdate = in.readLine();
+      //last name validation
+      do {
+        System.out.print("Enter the last name of the customer: ");
+        try {
+          lastname = in.readLine();
+          if(lastname.length() <= 0 || lastname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
+      //booking date validation
+      do {
+        System.out.print("Enter the date of the booking in the format MM/DD/YY: ");
+        try {
+          bookingdate = in.readLine();
+          if(bookingdate.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
+
+      //make a new bookingid
       String getbookingid = "(SELECT MAX(bID) FROM Booking)";
       Statement stmt = esql._connection.createStatement();
       ResultSet rs = stmt.executeQuery(getbookingid);
       rs.next();
-      int bookingid = rs.getInt(1) + 1;
+      bookingid = rs.getInt(1) + 1;
 
+      //get an existing customerid
       String getcustomerid = "SELECT C.customerID FROM Customer C WHERE C.fname = '" + firstname + "' AND C.lname = '" + lastname + "'";
-      System.out.println(getcustomerid);
       Statement stmt1 = esql._connection.createStatement();
       ResultSet rs1 = stmt1.executeQuery(getcustomerid);
-      //rs1.next();
-      //int customerid = rs1.getInt(1);
-      int customerid = 0;
+      customerid = 0;
       if(rs1.next()){
         customerid = rs1.getInt(1);
 
       }else{
         // throw error saying user don't exist
         System.out.println("No USER!!!");
-
       }
 
-      int partypeople = 1;
+      //number of people validation
+       do {
+        String choice;
+        System.out.print("Is there more than 1 person in the party? (y/n): ");
+        try {
+          choice = in.readLine();
+          choice = choice.toLowerCase();
 
-      System.out.print("What was the price of your stay?: $");
-      String price = in.readLine();
+          if(choice.equals("y") || choice.equals("yes") ) {
+            System.out.print("Enter the #people in the party: ");
+            partypeople = Integer.parseInt(in.readLine());
+          }
+          else if(choice.equals("n") || choice.equals("no") ) {
+            partypeople = 1;
+          }
+          else {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
+
+      //booking price validation
+      do {
+        System.out.print("Enter the price of the booking: $");
+        try {
+          price = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
       String query = "INSERT INTO Booking VALUES (" + bookingid + ", " + customerid + ", " + hotelid + ", " + roomnum + ", \'" + bookingdate + "\', " + partypeople + ", " + price + ")";
-      System.out.println(query);
-      int rowCount = esql.executeQuery(query);
-      System.out.println ("total row(s): " + rowCount);
+      esql.executeUpdate(query);
+
+      System.out.print("\nSuccessfully added the following booking:\n");
+      System.out.print("\tBooking ID: " + bookingid + "\n");
+      System.out.print("\tName: " + firstname + " " + lastname + "\n");
+      System.out.print("\tCustomer ID: " + customerid + "\n");
+      System.out.print("\tHotel ID: " + hotelid + "\n");
+      System.out.print("\tRoom Number: " + roomnum + "\n");
+      System.out.print("\tDate of Booking: " + bookingdate + "\n");
+      System.out.print("\t# people in party: " + partypeople + "\n");
+      System.out.print("\tPrice: $" + price + "\n\n");
       
-      System.out.print("Successfully added the following booking:\n");
       } catch(Exception e) {
         System.err.println(e.getMessage());
       }
