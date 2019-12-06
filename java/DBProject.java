@@ -822,9 +822,13 @@ public class DBProject {
         }
       } while(true);
 
+      System.out.print("\n\tRESULTS\n");
+      System.out.print("-----------------------\n");
+
       String query = "SELECT COUNT(roomNo) FROM Booking B WHERE B.hotelID = " + hotelid;
 
       esql.executeQuery(query);
+
       System.out.print("\n\n");
 
     } catch(Exception e){
@@ -910,9 +914,14 @@ public class DBProject {
         }
       } while(true);
 
+      System.out.print("\n\tRESULTS\n");
+      System.out.print("-----------------------\n");
+
       String query = "SELECT B.price, B.bookingDate FROM Room R, Booking B WHERE R.roomNo = B.roomNo AND R.hotelID = B.hotelID AND (B.bookingDate BETWEEN '" + daterange1 + "' AND '" + daterange2 + "') ORDER BY B.price DESC LIMIT " + k;
 
       esql.executeQuery(query);
+
+      System.out.print("\n\n");
 
     } catch(Exception e){
          System.err.println (e.getMessage());
@@ -950,33 +959,98 @@ public class DBProject {
    //CHOICE 13 - DONE
    public static void totalCostForCustomer(DBProject esql){
     // Given a hotelID, customer Name and date range get the total cost incurred by the customer
-      // Your code goes here.
-      // ...
-      // ...
 
     try {
-      System.out.println("\tGET TOTAL COST FOR A CUSTOMER");
+      int hotelid;
+      String firstname;
+      String lastname;
+      String daterange1;
+      String daterange2;
 
-      System.out.print("Enter the hotelID: ");
-      String hotelid = in.readLine();
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "          GET TOTAL COST FOR A CUSTOMER                  \n" +
+         "*******************************************************\n");
 
-      System.out.print("Enter the first name of the customer: ");
-      String firstname = in.readLine();
+      //hotelid validation
+      do {
+        System.out.print("Enter the hotelID: ");
+        try {
+          hotelid = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the last name of the customer: ");
-      String lastname = in.readLine();
+       //first name validation
+      do {
+        System.out.print("Enter the first name of the customer: ");
+        try {
+          firstname = in.readLine();
+          if(firstname.length() <= 0 || firstname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the first date range in the format MM/DD/YY: ");
-      String daterange1 = in.readLine();
+      //last name validation
+      do {
+        System.out.print("Enter the last name of the customer: ");
+        try {
+          lastname = in.readLine();
+          if(lastname.length() <= 0 || lastname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the second date range in the format MM/DD/YY: ");
-      String daterange2 = in.readLine();
+      //daterange1 validation
+      do {
+        System.out.print("Enter the first date range in the format MM/DD/YY: ");
+        try {
+          daterange1 = in.readLine();
+          if(daterange1.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
+
+      //daterange2 validation
+      do {
+        System.out.print("Enter the second date range in the format MM/DD/YY: ");
+        try {
+          daterange2 = in.readLine();
+          if(daterange2.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
+
+      System.out.print("\n\tRESULTS\n");
+      System.out.print("-----------------------\n");
 
       String query = "SELECT SUM(price) FROM Booking B WHERE B.hotelID = " + hotelid + " AND B.customer = (SELECT C.customerID FROM Customer C WHERE C.fName = \'" + firstname + "\' AND C.lName = \'" + lastname + "\') AND B.bookingDate BETWEEN \'" + daterange1 + "\' AND \'" + daterange2 + "\'";
-      System.out.println(query);
+      esql.executeQuery(query);
 
-      int rowCount = esql.executeQuery(query);
-         System.out.println ("total row(s): " + rowCount);
+      System.out.print("\n\n");
 
     } catch(Exception e){
          System.err.println (e.getMessage());
