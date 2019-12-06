@@ -389,7 +389,42 @@ public class DBProject {
       // Your code goes here.
       // ...
       // ...
-      try {
+      try {}
+        int hotelid;
+        int roomnum;
+        String roomtype;
+
+        System.out.println(
+         "\n\n*******************************************************\n" +
+         "              ADD A ROOM                     \n" +
+         "*******************************************************\n");
+        //hotelID validation
+        do{
+          System.out.print("Enter the hotelID: ");
+          try{
+            hotelid = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+        }while(true);
+
+        //roomNo validation
+
+        do{
+          System.out.print("Enter the room number: ");
+          try{
+            roomnum = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+        }while(true);
+
+        //room 
+
         System.out.println("\tADD ROOM");
         System.out.print("Enter the hotelID: ");
         String hotelid = in.readLine();
