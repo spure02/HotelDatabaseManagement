@@ -802,23 +802,34 @@ public class DBProject {
    //CHOICE 9 - DONE
    public static void numberOfBookedRooms(DBProject esql){
     // Given a hotelID, get the count of rooms booked
-      // Your code goes here.
-      // ...
-      // ...
     try {
-      System.out.println("\tGET NUMBER OF BOOKED ROOMS");
-      String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = ";
-      System.out.print("Enter the hotelID: ");
-      String hotelid = in.readLine();
-      query += hotelid;
+      int hotelid;
 
-      int rowCount = esql.executeQuery(query);
-      System.out.println ("total row(s): " + rowCount);
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "              LIST NUMBER OF BOOKED ROOMS                    \n" +
+         "*******************************************************\n");
+
+      //hotelid validation
+      do {
+        System.out.print("Enter the hotelID: ");
+        try {
+          hotelid = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
+
+      String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = " + hotelid;
+
+      esql.executeQuery(query);
+      System.out.print("\n\n");
 
     } catch(Exception e){
          System.err.println (e.getMessage());
       }
-
    }//end numberOfBookedRooms
    
    //CHOICE 10 - DONE
@@ -866,7 +877,7 @@ public class DBProject {
       System.out.print("Enter how many rooms you want to see: ");
       String k = in.readLine();
 
-      String query = "SELECT B.price, B.bookingDate FROM Room R, Booking B WHERE R.roomNo = B.roomNo AND B.bookingDate BETWEEN '" + daterange1 + "' AND '" + daterange2 + "' ORDER BY B.price DESC LIMIT " + k;
+      String query = "SELECT B.price, B.bookingDate FROM Room R, Booking B WHERE R.roomNo = B.roomNo AND (B.bookingDate BETWEEN '" + daterange1 + "' AND '" + daterange2 + "') ORDER BY B.price DESC LIMIT " + k;
       System.out.println(query);
 
       int rowCount = esql.executeQuery(query);
