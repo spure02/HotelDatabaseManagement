@@ -389,7 +389,7 @@ public class DBProject {
       // Your code goes here.
       // ...
       // ...
-      try {}
+      try {
         int hotelid;
         int roomnum;
         String roomtype;
@@ -423,9 +423,25 @@ public class DBProject {
           }
         }while(true);
 
-        //room 
+        //roomType validation
+        do{
+          System.out.print("Enter the room type: ");
 
-        System.out.println("\tADD ROOM");
+          try{
+            roomtype = in.readLine();
+            if(roomtype.length() <= 0 || roomtype.length() > 10){
+              throw new RuntimeException("Invalid input");
+            }
+            break;
+
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+
+        } while(true);
+
+        /*System.out.println("\tADD ROOM");
         System.out.print("Enter the hotelID: ");
         String hotelid = in.readLine();
 
@@ -433,17 +449,25 @@ public class DBProject {
         String roomnum = in.readLine();
 
         System.out.print("Enter the room type: ");
-        String roomtype = in.readLine();
+        String roomtype = in.readLine();*/
 
         String query = "INSERT INTO Room VALUES (" + hotelid + ", " + roomnum + ", '" + roomtype + "')";
         System.out.println(query);
-         
+        
+        esql.executeUpdate(newcustomer);
 
-        int rowCount = esql.executeQuery(query);
-        System.out.println ("total row(s): " + rowCount);
-      } catch(Exception e){
+        System.out.print("\nSuccessfully added the following room to the database:\n");
+        System.out.print("\tHotel ID: " + hotelid + "\n");
+        System.out.print("\troom number " + roomnum + "\n");
+        System.out.print("\troom type: " + roomtype +  "\n");
+        
+
+        //int rowCount = esql.executeQuery(query);
+        //System.out.println ("total row(s): " + rowCount);
+        }catch(Exception e){
          System.err.println (e.getMessage());
-      }
+        }
+      
 
    }//end addRoom
 
