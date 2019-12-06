@@ -256,45 +256,127 @@ public class DBProject {
    //CHOICE 1 - DONE
    public static void addCustomer(DBProject esql){
     // Given customer details add the customer in the DB 
-      // Your code goes here.
-      // ...
-      // ...
-
+      
     try {
+      int customerid;
+      String firstname;
+      String lastname;
+      String address;
+      int phonenum;
+      String dateofbirth;
+      String gender;
+
       System.out.println(
          "\n\n*******************************************************\n" +
-         "              ADD CUSTOMER                     \n" +
+         "              ADD A CUSTOMER                     \n" +
          "*******************************************************\n");
       
+      //customerid validation
+      do {
+        System.out.print("Enter the customerID of the customer: ");
+        try {
+          customerid = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the customerID of the customer: ");
-      String customerid = in.readLine();
+      //first name validation
+      do {
+        System.out.print("Enter the first name of the customer: ");
+        try {
+          firstname = in.readLine();
+          if(firstname.length() <= 0 || firstname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the first name of the customer: ");
-      String firstname = in.readLine();
+      //last name validation
+      do {
+        System.out.print("Enter the last name of the customer: ");
+        try {
+          lastname = in.readLine();
+          if(lastname.length() <= 0 || lastname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the last name of the customer: ");
-      String lastname = in.readLine();
+      //address validation
+      do {
+        System.out.print("Enter the address of the customer: ");
+        try {
+          address = in.readLine();
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the address of the customer: ");
-      String addy = in.readLine();
+      //phone number validation
+       do {
+        System.out.print("Enter the phone number of the customer, at most 10 digits, no spaces or hyphens: ");
+        try {
+          phonenum = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the phone number of the customer, at most 10 digits, no spaces or hyphens: ");
-      String phonenum = in.readLine();
+      //date of birth validation
+      do {
+        System.out.print("Enter the date of birth of the customer in the format MM/DD/YY: ");
+        try {
+          dateofbirth = in.readLine();
+          if(lastname.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the date of birth of the customer in the format MM/DD/YY: ");
-      String dateofbirth = in.readLine();
+      //gender validation
+      do {
+        System.out.print("Enter the customer's gender, either Male, Female, or Other: ");
+        try {
+          gender = in.readLine();
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the customer's gender, either Male, Female, or Other: ");
-      String gender = in.readLine();
+      String newcustomer = "INSERT INTO Customer VALUES (" + customerid + ", " + "'" + firstname + "', '"  + lastname + "', '" + address + "', " + phonenum + ", '" + dateofbirth + "', '" + gender + "')";
+      //System.out.println(newcustomer);
 
-      String newcustomer = "INSERT INTO Customer VALUES (" + customerid + ", " + "'" + firstname + "', '"  + lastname + "', '" + addy + "', " + phonenum + ", '" + dateofbirth + "', '" + gender + "')";
-      System.out.println(newcustomer);
+      esql.executeUpdate(newcustomer);
 
-      int rowCount = esql.executeQuery(newcustomer);
-      System.out.println ("total row(s): " + rowCount);
-
-      System.out.print("Successfully added the following customer to the database\n");
+      System.out.print("\nSuccessfully added the following customer to the database:\n");
+      System.out.print("\tCustomer ID: " + customerid + "\n");
+      System.out.print("\tName: " + firstname + " " + lastname + "\n");
+      System.out.print("\tAddress: " + address +  "\n");
+      System.out.print("\tPhone Number: " + phonenum + "\n");
+      System.out.print("\tDate of Birth: " + dateofbirth +  "\n");
+      System.out.print("\tGender: " + gender + "\n\n");
+      
 
     } catch(Exception e){
          System.err.println (e.getMessage());
@@ -351,12 +433,17 @@ public class DBProject {
       System.out.print("Is this company certified? TRUE OR FALSE: ");
       String companycert= in.readLine();
 
-      String query = "INSERT INTO MaintenanceCompany VALUES (" + companyid + ", '" + companyname + "', " + companycert + ")";
+      String query = "INSERT INTO MaintenanceCompany VALUES (" + companyid + ", '" + companyname + "', '" + companyaddy + "', '" + companycert + "')";
   
-      int rowCount = esql.executeQuery(query);
-      System.out.println ("total row(s): " + rowCount);
+      esql.executeUpdate(query);
+      //System.out.println ("total row(s): " + rowCount);
 
-      System.out.print("Successfully added the following company:\n");
+      System.out.print("\nSuccessfully added the following company:\n");
+      System.out.print("\tCompany name: " + companyname + "\n");
+      System.out.print("\tCompany ID: " + companyid + "\n");
+      System.out.print("\tAddress: " + companyaddy + "\n");
+      System.out.print("\tCERTIFIED\n\n");
+
 
       } catch(Exception e) {
         System.err.println(e.getMessage());
