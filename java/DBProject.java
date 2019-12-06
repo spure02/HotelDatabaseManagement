@@ -415,40 +415,96 @@ public class DBProject {
    //CHOICE 3 - DONE
    public static void addMaintenanceCompany(DBProject esql){
       // Given maintenance Company details add the maintenance company in the DB
-      // ...
-      // ...
+
 
     try {
-      System.out.println("\tADD MAINTENANCE COMPANY");
+      int companyid;
+      String companyname;
+      String companyaddress;
+      String companycert;
 
-      System.out.print("Enter the companyID: ");
-      String companyid = in.readLine();
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "              ADD A MAINTENANCE COMPANY                     \n" +
+         "*******************************************************\n");
 
-      System.out.print("Enter the company name: ");
-      String companyname = in.readLine();
+      //companyid validation
+      do {
+        System.out.print("Enter the companyID: ");
+        try {
+          companyid = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
-      System.out.print("Enter the company address: ");
-      String companyaddy = in.readLine();
+      //company name validation
+      do {
+        System.out.print("Enter the company name: ");
+        try {
+          companyname = in.readLine();
+          if(companyname.length() <= 0 || companyname.length() > 30) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Is this company certified? TRUE OR FALSE: ");
-      String companycert= in.readLine();
+      //company address validation
+      do {
+        System.out.print("Enter the company address: ");
+        try {
+          companyaddress = in.readLine();
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      String query = "INSERT INTO MaintenanceCompany VALUES (" + companyid + ", '" + companyname + "', '" + companyaddy + "', '" + companycert + "')";
+      //company certification validation
+      do {
+        String certCheck;
+        System.out.print("Is this company certified? (y/n): ");
+        try {
+          certCheck = in.readLine();
+          certCheck = certCheck.toLowerCase();
+
+          if(certCheck.equals("y") || certCheck.equals("yes") ) {
+            companycert = "TRUE";
+          }
+          else if(certCheck.equals("n") || certCheck.equals("no") ) {
+            companycert = "FALSE";
+          }
+          else {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
+
+      String query = "INSERT INTO MaintenanceCompany VALUES (" + companyid + ", '" + companyname + "', '" + companyaddress + "', '" + companycert + "')";
   
       esql.executeUpdate(query);
-      //System.out.println ("total row(s): " + rowCount);
 
       System.out.print("\nSuccessfully added the following company:\n");
       System.out.print("\tCompany name: " + companyname + "\n");
       System.out.print("\tCompany ID: " + companyid + "\n");
-      System.out.print("\tAddress: " + companyaddy + "\n");
-      System.out.print("\tCERTIFIED\n\n");
+      System.out.print("\tAddress: " + companyaddress + "\n");
+      System.out.print("\tCERTIFICATION: " + companycert + "\n\n");
 
 
       } catch(Exception e) {
         System.err.println(e.getMessage());
       }
-
    }//end addMaintenanceCompany
 
    //CHOICE 4 - DONE
