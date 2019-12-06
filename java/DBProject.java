@@ -857,7 +857,7 @@ public class DBProject {
         }
       } while(true);
 
-      String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = " + hotelid;
+      String query = "SELECT COUNT(roomNo) FROM Booking B WHERE B.hotelID = " + hotelid;
 
       esql.executeQuery(query);
       System.out.print("\n\n");
@@ -896,32 +896,62 @@ public class DBProject {
    //CHOICE 11 - DONE
    public static void topKHighestRoomPriceForADateRange(DBProject esql){
     // List Top K Rooms with the highest price for a given date range
-      // Your code goes here.
-      // ...
-      // ...
-
     try {
-      System.out.println("\tTOP HIGHEST ROOM PRICE FOR A DATE RANGE");
+      String daterange1;
+      String daterange2;
+      int k;
 
-      System.out.print("Enter the first date range in the format MM/DD/YY: ");
-      String daterange1 = in.readLine();
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "         LIST TOP HIGHEST ROOM PRICE FOR A DATE RANGE                    \n" +
+         "*******************************************************\n");
 
-      System.out.print("Enter the second date range in the format MM/DD/YY: ");
-      String daterange2 = in.readLine();
+      do {
+        System.out.print("Enter the first date range in the format MM/DD/YY: ");
+        try {
+          daterange1 = in.readLine();
+          if(daterange1.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      System.out.print("Enter how many rooms you want to see: ");
-      String k = in.readLine();
+      do {
+        System.out.print("Enter the second date range in the format MM/DD/YY: ");
+        try {
+          daterange2 = in.readLine();
+          if(daterange2.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
 
-      String query = "SELECT B.price, B.bookingDate FROM Room R, Booking B WHERE R.roomNo = B.roomNo AND (B.bookingDate BETWEEN '" + daterange1 + "' AND '" + daterange2 + "') ORDER BY B.price DESC LIMIT " + k;
-      System.out.println(query);
+      do {
+        System.out.print("Enter how many rooms you want to see: ");
+        try {
+          k = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
 
-      int rowCount = esql.executeQuery(query);
-         System.out.println ("total row(s): " + rowCount);
+      String query = "SELECT B.price, B.bookingDate FROM Room R, Booking B WHERE R.roomNo = B.roomNo AND R.hotelID = B.hotelID AND (B.bookingDate BETWEEN '" + daterange1 + "' AND '" + daterange2 + "') ORDER BY B.price DESC LIMIT " + k;
+
+      esql.executeQuery(query);
 
     } catch(Exception e){
          System.err.println (e.getMessage());
       }
-
    }//end topKHighestRoomPriceForADateRange
    
    //CHOICE 12 - DONE 
