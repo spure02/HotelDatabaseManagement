@@ -551,6 +551,88 @@ public class DBProject {
       // ...
       // ...
       try {
+        int repairid;
+        int hotelid;
+        int roomnum;
+        int companyid;
+        String repairdate;
+
+        System.out.println(
+         "\n\n*******************************************************\n" +
+         "              ADD A REPAIR                     \n" +
+         "*******************************************************\n");
+
+        //repairid validation
+
+        do{
+          System.out.print("Enter the repair ID: ");
+          try{
+            repairid = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+        }while(true);
+
+        //hotelID validation
+        do{
+          System.out.print("Enter the hotel ID number: ");
+          try{
+            hotelid = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+        }while(true);
+
+        //roomnum validation
+
+        do{
+          System.out.print("Enter the room number: ");
+          try{
+            roomnum = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+        }while(true);
+
+        //companyid validation
+        do{
+          System.out.print("Enter the company ID number: ");
+          try{
+            companyid = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+        }while(true);
+
+
+
+        //repairdate validation
+        do{
+          System.out.print("Enter the room type: ");
+
+          try{
+            roomtype = in.readLine();
+            if(roomtype.length() <= 0 || roomtype.length() > 10){
+              throw new RuntimeException("Invalid input");
+            }
+            break;
+
+          } catch(Exception e){
+            System.err.println(e.getMessage());
+            continue;
+          }
+
+        } while(true);
+
+
         System.out.println("\tADD REPAIR");
 
         System.out.print("Enter the repairID: ");
