@@ -307,7 +307,7 @@ public class DBProject {
       
       //customerid validation
       do {
-        System.out.print("Enter the customerID of the customer: ");
+        System.out.print("Enter the Customer ID of the customer: ");
         try {
           customerid = Integer.parseInt(in.readLine());
           break;
@@ -323,7 +323,7 @@ public class DBProject {
         try {
           firstname = in.readLine();
           if(firstname.length() <= 0 || firstname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -338,7 +338,7 @@ public class DBProject {
         try {
           lastname = in.readLine();
           if(lastname.length() <= 0 || lastname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -377,7 +377,7 @@ public class DBProject {
         try {
           dateofbirth = in.readLine();
           if(dateofbirth.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -431,7 +431,7 @@ public class DBProject {
          "*******************************************************\n");
         //hotelID validation
         do{
-          System.out.print("Enter the hotelID: ");
+          System.out.print("Enter an existing Hotel ID: ");
           try{
             hotelid = Integer.parseInt(in.readLine());
             break;
@@ -443,7 +443,7 @@ public class DBProject {
 
         //roomNo validation
         do{
-          System.out.print("Enter the room number: ");
+          System.out.print("Enter the new room number: ");
           try{
             roomnum = Integer.parseInt(in.readLine());
             break;
@@ -455,12 +455,12 @@ public class DBProject {
 
         //roomType validation
         do{
-          System.out.print("Enter the room type: ");
+          System.out.print("Enter the new room type: ");
 
           try{
             roomtype = in.readLine();
             if(roomtype.length() <= 0 || roomtype.length() > 10){
-              throw new RuntimeException("Invalid input");
+              throw new RuntimeException("Invalid input, please try again.");
             }
             break;
 
@@ -501,7 +501,7 @@ public class DBProject {
 
       //companyid validation
       do {
-        System.out.print("Enter the companyID: ");
+        System.out.print("Enter a new Maintenance Company ID: ");
         try {
           companyid = Integer.parseInt(in.readLine());
           break;
@@ -513,11 +513,11 @@ public class DBProject {
 
       //company name validation
       do {
-        System.out.print("Enter the company name: ");
+        System.out.print("Enter a new Maintenance Company name: ");
         try {
           companyname = in.readLine();
           if(companyname.length() <= 0 || companyname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -528,7 +528,7 @@ public class DBProject {
 
       //company address validation
       do {
-        System.out.print("Enter the company address: ");
+        System.out.print("Enter a new Maintenance Company address: ");
         try {
           companyaddress = in.readLine();
           break;
@@ -553,7 +553,7 @@ public class DBProject {
             companycert = "FALSE";
           }
           else {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -595,7 +595,7 @@ public class DBProject {
 
         //repairid validation
         do{
-          System.out.print("Enter the repair ID: ");
+          System.out.print("Enter a new Repair ID: ");
           try{
             repairid = Integer.parseInt(in.readLine());
             break;
@@ -607,7 +607,7 @@ public class DBProject {
 
         //hotelID validation
         do{
-          System.out.print("Enter the hotel ID number: ");
+          System.out.print("Enter an existing Hotel ID number: ");
           try{
             hotelid = Integer.parseInt(in.readLine());
             break;
@@ -619,7 +619,7 @@ public class DBProject {
 
         //roomnum validation
         do{
-          System.out.print("Enter the room number: ");
+          System.out.print("Enter the existing room number: ");
           try{
             roomnum = Integer.parseInt(in.readLine());
             break;
@@ -631,7 +631,7 @@ public class DBProject {
 
         //companyid validation
         do{
-          System.out.print("Enter the company ID number: ");
+          System.out.print("Enter the existing Maintenance Company ID: ");
           try{
             companyid = Integer.parseInt(in.readLine());
             break;
@@ -648,7 +648,7 @@ public class DBProject {
           try{
             repairdate = in.readLine();
             if(repairdate.length() <= 0){
-              throw new RuntimeException("Invalid input");
+              throw new RuntimeException("Invalid input, please try again.");
             }
             break;
 
@@ -695,7 +695,7 @@ public class DBProject {
 
       //hotelid validation
       do {
-        System.out.print("Enter the hotelID: ");
+        System.out.print("Enter an existing Hotel ID: ");
         try {
           hotelid = Integer.parseInt(in.readLine());
           break;
@@ -707,7 +707,7 @@ public class DBProject {
 
       //room number validation
       do {
-        System.out.print("Enter the room number: ");
+        System.out.print("Enter the existing room number: ");
         try {
           roomnum = Integer.parseInt(in.readLine());
           break;
@@ -719,11 +719,11 @@ public class DBProject {
 
       //first name validation
       do {
-        System.out.print("Enter the first name of the customer: ");
+        System.out.print("Enter the first name of the existing customer: ");
         try {
           firstname = in.readLine();
           if(firstname.length() <= 0 || firstname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -734,11 +734,11 @@ public class DBProject {
 
       //last name validation
       do {
-        System.out.print("Enter the last name of the customer: ");
+        System.out.print("Enter the last name of the existing customer: ");
         try {
           lastname = in.readLine();
           if(lastname.length() <= 0 || lastname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -753,7 +753,7 @@ public class DBProject {
         try {
           bookingdate = in.readLine();
           if(bookingdate.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -798,7 +798,7 @@ public class DBProject {
             partypeople = 1;
           }
           else {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -852,7 +852,7 @@ public class DBProject {
 
           //staffid validation
           do {
-            System.out.print("Enter the staffID number: ");
+            System.out.print("Enter the existing Staff ID: ");
             try {
               staffid = Integer.parseInt(in.readLine());
               break;
@@ -864,7 +864,7 @@ public class DBProject {
 
           //hotelid validation
           do {
-            System.out.print("Enter the hotelID number: ");
+            System.out.print("Enter the existing Hotel ID: ");
             try {
               hotelid = Integer.parseInt(in.readLine());
               break;
@@ -876,7 +876,7 @@ public class DBProject {
 
           //roomnum validation
           do {
-            System.out.print("Enter the room number: ");
+            System.out.print("Enter the existing room number: ");
             try {
               roomnum = Integer.parseInt(in.readLine());
               break;
@@ -920,13 +920,13 @@ public class DBProject {
 
       //managerid validation
       do {
-        System.out.print("Please enter your managerID: ");
+        System.out.print("Please enter your Staff ID: ");
         try {
           managerid = Integer.parseInt(in.readLine());
           String errorCheck = "SELECT S.SSN FROM Staff S WHERE S.SSN = " + managerid + " AND S.role = 'Manager'";
           int checkErrors = esql.checkErrors(errorCheck);
           if(checkErrors == 0) {
-            throw new RuntimeException("ERROR: Please enter a valid Manager ID.");
+            throw new RuntimeException("ERROR: Please enter a valid Staff ID. Only Managers can add repair requests.");
           }
           else {
             System.out.println(
@@ -936,7 +936,7 @@ public class DBProject {
 
                 //repair id validation
                 do {
-                  System.out.print("Please enter the repairID for the request: ");
+                  System.out.print("Please enter the existing Repair ID for the request: ");
                   try {
                     repairid = Integer.parseInt(in.readLine());
                     break;
@@ -1003,7 +1003,7 @@ public class DBProject {
 
           //hotelid validation
           do {
-            System.out.print("Enter the hotelID number: ");
+            System.out.print("Enter the existing Hotel ID: ");
             try {
               hotelid = Integer.parseInt(in.readLine());
               break;
@@ -1039,7 +1039,7 @@ public class DBProject {
 
       //hotelid validation
       do {
-        System.out.print("Enter the hotelID: ");
+        System.out.print("Enter the existing Hotel ID: ");
         try {
           hotelid = Integer.parseInt(in.readLine());
           break;
@@ -1080,7 +1080,7 @@ public class DBProject {
         try {
           bookingdate = in.readLine();
           if(bookingdate.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1091,7 +1091,7 @@ public class DBProject {
 
       //hotelid validation
       do {
-        System.out.print("Enter the hotelID number: ");
+        System.out.print("Enter the existing Hotel ID: ");
         try {
           hotelid = Integer.parseInt(in.readLine());
           break;
@@ -1132,7 +1132,7 @@ public class DBProject {
         try {
           daterange1 = in.readLine();
           if(daterange1.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1146,7 +1146,7 @@ public class DBProject {
         try {
           daterange2 = in.readLine();
           if(daterange2.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1196,11 +1196,11 @@ public class DBProject {
 
         //first name validation
         do {
-          System.out.print("Enter the first name of the customer: ");
+          System.out.print("Enter the first name of the existing customer: ");
           try {
             firstname = in.readLine();
             if(firstname.length() <= 0 || firstname.length() > 30) {
-              throw new RuntimeException("Invalid input");
+              throw new RuntimeException("Invalid input, please try again.");
             }
             break;
           } catch(Exception e){
@@ -1211,11 +1211,11 @@ public class DBProject {
 
         //last name validation
         do {
-          System.out.print("Enter the last name of the customer: ");
+          System.out.print("Enter the last name of the existing customer: ");
           try {
             lastname = in.readLine();
             if(lastname.length() <= 0 || lastname.length() > 30) {
-              throw new RuntimeException("Invalid input");
+              throw new RuntimeException("Invalid input, please try again.");
             }
             break;
           } catch(Exception e){
@@ -1269,7 +1269,7 @@ public class DBProject {
 
       //hotelid validation
       do {
-        System.out.print("Enter the hotelID: ");
+        System.out.print("Enter the existing Hotel ID: ");
         try {
           hotelid = Integer.parseInt(in.readLine());
           break;
@@ -1281,11 +1281,11 @@ public class DBProject {
 
        //first name validation
       do {
-        System.out.print("Enter the first name of the customer: ");
+        System.out.print("Enter the first name of the existing customer: ");
         try {
           firstname = in.readLine();
           if(firstname.length() <= 0 || firstname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1296,11 +1296,11 @@ public class DBProject {
 
       //last name validation
       do {
-        System.out.print("Enter the last name of the customer: ");
+        System.out.print("Enter the last name of the existing customer: ");
         try {
           lastname = in.readLine();
           if(lastname.length() <= 0 || lastname.length() > 30) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1315,7 +1315,7 @@ public class DBProject {
         try {
           daterange1 = in.readLine();
           if(daterange1.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1330,7 +1330,7 @@ public class DBProject {
         try {
           daterange2 = in.readLine();
           if(daterange2.length() <= 0) {
-            throw new RuntimeException("Invalid input");
+            throw new RuntimeException("Invalid input, please try again.");
           }
           break;
         } catch(Exception e){
@@ -1365,11 +1365,11 @@ public class DBProject {
 
         //company name validation
         do {
-          System.out.print("Enter the company name: ");
+          System.out.print("Enter the existing Maintenance Company name: ");
           try {
             companyname = in.readLine();
             if(companyname.length() <= 0 || companyname.length() > 30) {
-              throw new RuntimeException("Invalid input");
+              throw new RuntimeException("Invalid input, please try again.");
             }
             break;
           } catch(Exception e){
@@ -1405,7 +1405,7 @@ public class DBProject {
 
       //k validation
       do {
-        System.out.print("How many top companies do you want to see?: ");
+        System.out.print("How many top Maintenance Companies do you want to see?: ");
         try {
           k = Integer.parseInt(in.readLine());
           break;
@@ -1442,7 +1442,7 @@ public class DBProject {
 
         //hotelid validation
         do {
-          System.out.print("Enter the hotelID number: ");
+          System.out.print("Enter the existing Hotel ID: ");
           try {
             hotelid = Integer.parseInt(in.readLine());
             break;
@@ -1454,7 +1454,7 @@ public class DBProject {
 
         //roomnum validation
         do {
-          System.out.print("Enter the room number: ");
+          System.out.print("Enter the existing room number: ");
           try {
             roomnum = Integer.parseInt(in.readLine());
             break;
@@ -1469,7 +1469,7 @@ public class DBProject {
          
         String query = "SELECT DATE_PART('year', Rep.repairDate), COUNT(*) FROM Repair Rep WHERE Rep.hotelID = " + hotelid + " AND Rep.roomNo = " + roomnum + " GROUP BY DATE_PART('year', Rep.repairDate)";
         esql.executeQuery(query);
-        
+
         System.out.print("\n\n");
          
       } catch(Exception e){
