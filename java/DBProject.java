@@ -1434,28 +1434,51 @@ public class DBProject {
       // Your code goes here.
     
       try{
-        System.out.println("\tLIST NUMBER OF REPAIRS FOR EACH ROOM PER YEAR");
-         
-        System.out.print("Enter the hotelID: ");
-        String hotelid = in.readLine();
 
-        System.out.print("Enter the room number: ");
-        String roomnum = in.readLine();
+        int hotelid;
+        int roomnum;
+
+        System.out.println(
+         "\n\n*******************************************************\n" +
+         "          NUMBER OF REPAIRS FOR EACH ROOM PER YEAR          \n" +
+         "*******************************************************\n");
+
+        //hotelid validation
+        do {
+          System.out.print("Enter the hotelID number: ");
+          try {
+            hotelid = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+           System.err.println (e.getMessage());
+           continue;
+          }
+        } while(true);
+
+        //roomnum validation
+        do {
+          System.out.print("Enter the room number: ");
+          try {
+            roomnum = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+           System.err.println (e.getMessage());
+           continue;
+          }
+        } while(true);
+
 
         System.out.print("\n\tRESULTS\n");
-      System.out.print("-----------------------\n");
+        System.out.print("-----------------------\n");
          
         String query = "SELECT DATE_PART('year', Rep.repairDate), COUNT(*) FROM Repair Rep WHERE Rep.hotelID = " + hotelid + " AND Rep.roomNo = " + roomnum + " GROUP BY DATE_PART('year', Rep.repairDate)";
-        
-        //System.out.println(query);
-
-        System.out.print("\n\n");
 
         esql.executeQuery(query);
-        //System.out.println ("total row(s): " + rowCount);
+
+        System.out.print("\n\n");
          
       } catch(Exception e){
-         System.err.println (e.getMessage());
+        System.err.println (e.getMessage());
       }
    }//end listRepairsMade
 }//end DBProject
