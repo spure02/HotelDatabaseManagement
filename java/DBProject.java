@@ -1355,7 +1355,6 @@ public class DBProject {
    //CHOICE 14 - DONE
    public static void listRepairsMade(DBProject esql){
     // Given a Maintenance company name list all the repairs along with repairType, hotelID and roomNo
-      // Your code goes here.
       try {
         String companyname;
 
@@ -1383,7 +1382,6 @@ public class DBProject {
         System.out.print("-----------------------\n");
 
         String query = "SELECT DISTINCT Rep.rID, Rep.repairType, Rep.hotelID, Rep.roomNo FROM Repair Rep, MaintenanceCompany M WHERE M.cmpID = Rep.mCompany AND M.name = '" + companyname + "'";
-
         esql.executeQuery(query);
 
         System.out.print("\n\n");
