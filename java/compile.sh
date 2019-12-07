@@ -11,5 +11,7 @@ javac DBProject.java
 
 #run the java program
 #Use your database name, port number and login
+psql -h localhost $PGPORT $USER"_DB" < ../sql/create_indexes.sql
 java DBProject $USER"_DB" $PGPORT $USER
+
 
