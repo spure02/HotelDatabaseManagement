@@ -125,6 +125,40 @@ public class DBProject {
       return rowCount;
    }//end executeQuery
 
+   public int checkErrors (String query) throws SQLException {
+      // creates a statement object
+      Statement stmt = this._connection.createStatement ();
+
+      // issues the query instruction
+      ResultSet rs = stmt.executeQuery (query);
+
+      /*
+       ** obtains the metadata object for the returned result set.  The metadata
+       ** contains row and column info.
+       */
+      ResultSetMetaData rsmd = rs.getMetaData ();
+      int numCol = rsmd.getColumnCount ();
+      int rowCount = 0;
+
+      // iterates through the result set and output them to standard out.
+      boolean outputHeader = true;
+      while (rs.next()){
+   if(outputHeader){
+      for(int i = 1; i <= numCol; i++){
+    //System.out.print(rsmd.getColumnName(i) + "\t");
+      }
+      //System.out.println();
+      outputHeader = false;
+   }
+         for (int i=1; i<=numCol; ++i)
+        //    System.out.print (rs.getString (i) + "\t");
+         //System.out.println ();
+         ++rowCount;
+      }//end while
+      stmt.close ();
+      return rowCount;
+   }//end checkErrors
+
    /**
     * Method to close the physical connection if it is open.
     */
@@ -864,34 +898,81 @@ public class DBProject {
    //CHOICE 7 - DONE
    public static void repairRequest(DBProject esql){
     // Given a hotelID, Staff SSN, roomNo, repairID , date create a repair request in the DB
-      // Your code goes here.
-      // ...
-      // ...
-
     try {
-      System.out.println("\tREPAIR REQUESTS");
+      int requestid;
+      int managerid;
+      int repairid;
+      String requestdate;
 
-      System.out.print("Please enter your managerID: ");
-      String managerid = in.readLine();
+      System.out.println("\tMAKE A NEW REPAIR REQUEST");
 
-      System.out.print("Please enter the repairID for the request: ");
-      String repairid = in.readLine();
+      //managerid validation
+      do {
+        System.out.print("Please enter your managerID: ");
+        try {
+          managerid = Integer.parseInt(in.readLine());
+          String errorCheck = "SELECT S.SSN FROM Staff S WHERE S.SSN = " + managerid + " AND S.role = 'Manager'";
+          int checkErrors = esql.checkErrors(errorCheck);
+          if(checkErrors == 0) {
+            throw new RuntimeException("ERROR: Please enter a valid Manager ID.");
+          }
+          else {
+            System.out.println(
+                "\n\n*******************************************************\n" +
+                "              MAKE A NEW REPAIR REQUEST                    \n" +
+                "*******************************************************\n");
 
-      System.out.print("Please enter the date of the request in the format MM/DD/YY: ");
-      String requestdate = in.readLine();
+                //repair id validation
+                do {
+                  System.out.print("Please enter the repairID for the request: ");
+                  try {
+                    repairid = Integer.parseInt(in.readLine());
+                    break;
+                  } catch(Exception e){
+                    System.err.println (e.getMessage());
+                    continue;
+                  }
+                } while(true);
 
+                //request date validation
+                do {
+                  System.out.print("Please enter the date of the request in the format MM/DD/YY: ");
+                  try {
+                    requestdate = in.readLine();
+                    if(requestdate.length() <= 0) {
+                      throw new RuntimeException("Invalid input");
+                    }
+                    break;
+                  } catch(Exception e){
+                    System.err.println (e.getMessage());
+                    continue;
+                  }
+                } while(true);
+          }
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
+
+      //get a new requestid
       String getrequestid = "(SELECT MAX(reqID) FROM REQUEST)";
       Statement stmt = esql._connection.createStatement();
       ResultSet rs = stmt.executeQuery(getrequestid);
       rs.next();
-      int requestid = rs.getInt(1) + 1;
+      requestid = rs.getInt(1) + 1;
 
       String requestinsert = "INSERT INTO Request VALUES (" + requestid + ", " + managerid + ", " + repairid + ", '" + requestdate + "')";
-      
-      System.out.println(requestinsert);
 
-      int rowCount = esql.executeQuery(requestinsert);
-      System.out.println ("total row(s): " + rowCount);
+      esql.executeUpdate(requestinsert);
+
+      System.out.print("\nSuccessfully added the following request:\n");
+      System.out.print("\tRequest ID: " + requestid + "\n");
+      System.out.print("\tManager ID: " + managerid + "\n");
+      System.out.print("\tRepair ID: " + repairid + "\n");
+      System.out.print("\tDate of Request: " + requestdate + "\n\n");
+
     } catch(Exception e) {
         System.err.println(e.getMessage());
       }
