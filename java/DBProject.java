@@ -1431,10 +1431,7 @@ public class DBProject {
    //CHOICE 16 - DONE
    public static void numberOfRepairsForEachRoomPerYear(DBProject esql){
     // Given a hotelID, roomNo, get the count of repairs per year
-      // Your code goes here.
-    
       try{
-
         int hotelid;
         int roomnum;
 
@@ -1467,14 +1464,12 @@ public class DBProject {
           }
         } while(true);
 
-
         System.out.print("\n\tRESULTS\n");
         System.out.print("-----------------------\n");
          
         String query = "SELECT DATE_PART('year', Rep.repairDate), COUNT(*) FROM Repair Rep WHERE Rep.hotelID = " + hotelid + " AND Rep.roomNo = " + roomnum + " GROUP BY DATE_PART('year', Rep.repairDate)";
-
         esql.executeQuery(query);
-
+        
         System.out.print("\n\n");
          
       } catch(Exception e){
