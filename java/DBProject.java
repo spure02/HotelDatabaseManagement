@@ -994,7 +994,6 @@ public class DBProject {
    public static void numberOfAvailableRooms(DBProject esql){
     // Given a hotelID, get the count of rooms available 
       try {
-
           int hotelid;
 
           System.out.println(
@@ -1054,7 +1053,6 @@ public class DBProject {
       System.out.print("-----------------------\n");
 
       String query = "SELECT COUNT(roomNo) FROM Booking B WHERE B.hotelID = " + hotelid;
-
       esql.executeQuery(query);
 
       System.out.print("\n\n");
@@ -1067,11 +1065,7 @@ public class DBProject {
    //CHOICE 10 - DONE
    public static void listHotelRoomBookingsForAWeek(DBProject esql){
     // Given a hotelID, date - list all the booked rooms for a week(including the input date) 
-      // Your code goes here.
-      // ...
-      // ...
     try {
-
       String bookingdate;
       int hotelid;
 
@@ -1110,17 +1104,14 @@ public class DBProject {
       System.out.print("\n\tRESULTS\n");
       System.out.print("-----------------------\n");
 
-
       String query = "SELECT B.roomNo FROM Booking B WHERE (B.bookingDate BETWEEN \'" + bookingdate + "\' AND DATE \'" + bookingdate + "\' + INTERVAL \'1 week\') AND B.hotelID = " + hotelid + " GROUP BY B.roomNo";
-
       esql.executeQuery(query);
+
       System.out.print("\n\n");
         
-
     } catch(Exception e){
          System.err.println (e.getMessage());
       }
-
    }//end listHotelRoomBookingsForAWeek
    
    //CHOICE 11 - DONE
