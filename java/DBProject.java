@@ -1183,8 +1183,6 @@ public class DBProject {
    //CHOICE 12 - DONE 
    public static void topKHighestPriceBookingsForACustomer(DBProject esql){
     // Given a customer Name, List Top K highest booking price for a customer (enter number)
-      // Your code goes here. 
-
       try {
 
         String firstname;
@@ -1195,7 +1193,6 @@ public class DBProject {
          "\n\n*******************************************************\n" +
          "         TOP K HIGHEST PRICE BOOKINGS FOR A CUSTOMER           \n" +
          "*******************************************************\n");
-
 
         //first name validation
         do {
@@ -1222,9 +1219,9 @@ public class DBProject {
             }
             break;
           } catch(Exception e){
-            System.err.println (e.getMessage());
-            continue;
-          }
+              System.err.println (e.getMessage());
+              continue;
+            }
         } while(true);
 
         //k value validation
@@ -1234,9 +1231,9 @@ public class DBProject {
             k = Integer.parseInt(in.readLine());
             break;
           } catch(Exception e){
-           System.err.println (e.getMessage());
-           continue;
-          }
+              System.err.println (e.getMessage());
+              continue;
+            }
         } while(true);
 
 
@@ -1250,9 +1247,8 @@ public class DBProject {
         System.out.print("\n\n");
         
       } catch(Exception e){
-        System.err.println (e.getMessage());
+          System.err.println (e.getMessage());
       }
-      
    }//end topKHighestPriceBookingsForACustomer
    
    //CHOICE 13 - DONE
