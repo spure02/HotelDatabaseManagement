@@ -386,9 +386,6 @@ public class DBProject {
    //CHOICE 2 - DONE
    public static void addRoom(DBProject esql){
     // Given room details add the room in the DB
-      // Your code goes here.
-      // ...
-      // ...
       try {
         int hotelid;
         int roomnum;
@@ -411,7 +408,6 @@ public class DBProject {
         }while(true);
 
         //roomNo validation
-
         do{
           System.out.print("Enter the room number: ");
           try{
@@ -441,18 +437,7 @@ public class DBProject {
 
         } while(true);
 
-        /*System.out.println("\tADD ROOM");
-        System.out.print("Enter the hotelID: ");
-        String hotelid = in.readLine();
-
-        System.out.print("Enter the room number: ");
-        String roomnum = in.readLine();
-
-        System.out.print("Enter the room type: ");
-        String roomtype = in.readLine();*/
-
         String query = "INSERT INTO Room VALUES (" + hotelid + ", " + roomnum + ", '" + roomtype + "')";
-        //System.out.println(query);
         
         esql.executeUpdate(query);
 
@@ -461,21 +446,14 @@ public class DBProject {
         System.out.print("\troom number " + roomnum + "\n");
         System.out.print("\troom type: " + roomtype +  "\n");
         
-
-        //int rowCount = esql.executeQuery(query);
-        //System.out.println ("total row(s): " + rowCount);
-        }catch(Exception e){
+        } catch(Exception e){
          System.err.println (e.getMessage());
         }
-      
-
    }//end addRoom
 
    //CHOICE 3 - DONE
    public static void addMaintenanceCompany(DBProject esql){
       // Given maintenance Company details add the maintenance company in the DB
-
-
     try {
       int companyid;
       String companyname;
@@ -1138,20 +1116,34 @@ public class DBProject {
    //CHOICE 15 - DONE
    public static void topKMaintenanceCompany(DBProject esql){
     // List Top K Maintenance Company Names based on total repair count (descending order)
-      // Your code goes here.
-      // ...
-      // ...
-    try {
-      System.out.println("\tLIST TOP K MAINTENANCE COMPANIES");
+    
+    try{
+      int k;
 
-      System.out.print("How many top companies do you want to see?: ");
-      String k = in.readLine();
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "          LIST TOP K MAINTENANCE COMPANIES                  \n" +
+         "*******************************************************\n");
+
+      //k validation
+      do {
+        System.out.print("How many top companies do you want to see?: ");
+        try {
+          k = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
+
+      System.out.print("\n\tRESULTS\n");
+      System.out.print("-----------------------\n");
 
       String query = "SELECT COUNT(rID), M.name FROM MaintenanceCompany M, Repair R WHERE M.cmpID = R.mCompany GROUP BY M.name ORDER BY COUNT(rID) DESC LIMIT " + k;
-      System.out.println(query);
+      esql.executeQuery(query);
 
-      int rowCount = esql.executeQuery(query);
-         System.out.println ("total row(s): " + rowCount);
+      System.out.print("\n\n");
 
     } catch(Exception e){
          System.err.println (e.getMessage());
@@ -1171,13 +1163,18 @@ public class DBProject {
 
         System.out.print("Enter the room number: ");
         String roomnum = in.readLine();
+
+        System.out.print("\n\tRESULTS\n");
+      System.out.print("-----------------------\n");
          
         String query = "SELECT DATE_PART('year', Rep.repairDate), COUNT(*) FROM Repair Rep WHERE Rep.hotelID = " + hotelid + " AND Rep.roomNo = " + roomnum + " GROUP BY DATE_PART('year', Rep.repairDate)";
         
-        System.out.println(query);
+        //System.out.println(query);
 
-        int rowCount = esql.executeQuery(query);
-        System.out.println ("total row(s): " + rowCount);
+        System.out.print("\n\n");
+
+        esql.executeQuery(query);
+        //System.out.println ("total row(s): " + rowCount);
          
       } catch(Exception e){
          System.err.println (e.getMessage());
