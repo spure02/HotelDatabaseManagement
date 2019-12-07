@@ -452,9 +452,9 @@ public class DBProject {
         String roomtype = in.readLine();*/
 
         String query = "INSERT INTO Room VALUES (" + hotelid + ", " + roomnum + ", '" + roomtype + "')";
-        System.out.println(query);
+        //System.out.println(query);
         
-        esql.executeUpdate(newcustomer);
+        esql.executeUpdate(query);
 
         System.out.print("\nSuccessfully added the following room to the database:\n");
         System.out.print("\tHotel ID: " + hotelid + "\n");
