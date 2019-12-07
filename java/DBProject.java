@@ -997,17 +997,39 @@ public class DBProject {
       // ...
       // ...
       try {
-        System.out.println("\tGET NUMBER OF AVAILABLE ROOMS");
 
-         String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo NOT IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = ";
-         System.out.println("Enter the hotelID:");
-         String input = in.readLine();
-         query += input;
+          int hotelid;
 
-         int rowCount = esql.executeQuery(query);
-         System.out.println ("total row(s): " + rowCount);
+          System.out.println(
+          "\n\n*******************************************************\n" +
+          "                NUMBER OF AVAILABLE ROOMS                  \n" +
+          "*******************************************************\n");
+
+          //hotelid validation
+          do {
+            System.out.print("Enter the hotelID number: ");
+            try {
+              hotelid = Integer.parseInt(in.readLine());
+              break;
+            } catch(Exception e){
+             System.err.println (e.getMessage());
+             continue;
+            }
+          } while(true);
+
+
+          System.out.println("\tGET NUMBER OF AVAILABLE ROOMS");
+
+          String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo NOT IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = ";
+          query += hotelid;
+          esql.executeUpdate(requestinsert);
+          
+
+          System.out.print("\nSuccessfully found the number of available rooms:\n");
+          System.out.print("\tHotel ID: " + hotelid + "\n");
+
       } catch(Exception e){
-         System.err.println (e.getMessage());
+          System.err.println (e.getMessage());
       }
    }//end numberOfAvailableRooms
    
