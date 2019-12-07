@@ -993,9 +993,6 @@ public class DBProject {
    //CHOICE 8 - DONE 
    public static void numberOfAvailableRooms(DBProject esql){
     // Given a hotelID, get the count of rooms available 
-      // Your code goes here.
-      // ...
-      // ...
       try {
 
           int hotelid;
@@ -1017,17 +1014,14 @@ public class DBProject {
             }
           } while(true);
 
+          System.out.print("\n\tRESULTS\n");
+          System.out.print("-----------------------\n");
 
-          System.out.println("\tGET NUMBER OF AVAILABLE ROOMS");
+          String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo NOT IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = " + hotelid;
+          esql.executeQuery(query);
 
-          String query = "SELECT COUNT(*) FROM Room R, Booking B WHERE R.hotelID = B.hotelID AND R.roomNo NOT IN (SELECT R.roomNo FROM Booking B WHERE R.roomNo = B.roomNo ) AND R.hotelID = ";
-          query += hotelid;
-          esql.executeUpdate(requestinsert);
+          System.out.print("\n\n");
           
-
-          System.out.print("\nSuccessfully found the number of available rooms:\n");
-          System.out.print("\tHotel ID: " + hotelid + "\n");
-
       } catch(Exception e){
           System.err.println (e.getMessage());
       }
