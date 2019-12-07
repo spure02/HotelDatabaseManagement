@@ -1357,17 +1357,39 @@ public class DBProject {
     // Given a Maintenance company name list all the repairs along with repairType, hotelID and roomNo
       // Your code goes here.
       try {
-         System.out.println("\tLIST REPAIRS MADE");
+        String companyname;
 
-         System.out.println("Enter the Maintenance company name: ");
-         String input = in.readLine();
+        System.out.println(
+         "\n\n*******************************************************\n" +
+         "          LIST OF REPAIRS MADE           \n" +
+         "*******************************************************\n");
 
-         String query = "SELECT DISTINCT Rep.rID, Rep.repairType, Rep.hotelID, Rep.roomNo FROM Repair Rep, MaintenanceCompany M WHERE M.cmpID = Rep.mCompany AND M.name = '" + input + "'";
+        //company name validation
+        do {
+          System.out.print("Enter the company name: ");
+          try {
+            companyname = in.readLine();
+            if(companyname.length() <= 0 || companyname.length() > 30) {
+              throw new RuntimeException("Invalid input");
+            }
+            break;
+          } catch(Exception e){
+            System.err.println (e.getMessage());
+            continue;
+          }
+        } while(true);
 
-         int rowCount = esql.executeQuery(query);
-         System.out.println ("total row(s): " + rowCount);
+        System.out.print("\n\tRESULTS\n");
+        System.out.print("-----------------------\n");
+
+        String query = "SELECT DISTINCT Rep.rID, Rep.repairType, Rep.hotelID, Rep.roomNo FROM Repair Rep, MaintenanceCompany M WHERE M.cmpID = Rep.mCompany AND M.name = '" + companyname + "'";
+
+        esql.executeQuery(query);
+
+        System.out.print("\n\n");
+        
       } catch(Exception e){
-         System.err.println (e.getMessage());
+        System.err.println (e.getMessage());
       }
    }//end listRepairsMade
    
