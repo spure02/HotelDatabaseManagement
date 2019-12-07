@@ -581,9 +581,6 @@ public class DBProject {
    //CHOICE 4 - DONE
    public static void addRepair(DBProject esql){
     // Given repair details add repair in the DB
-      // Your code goes here.
-      // ...
-      // ...
       try {
         int repairid;
         int hotelid;
@@ -597,7 +594,6 @@ public class DBProject {
          "*******************************************************\n");
 
         //repairid validation
-
         do{
           System.out.print("Enter the repair ID: ");
           try{
@@ -622,7 +618,6 @@ public class DBProject {
         }while(true);
 
         //roomnum validation
-
         do{
           System.out.print("Enter the room number: ");
           try{
@@ -646,15 +641,13 @@ public class DBProject {
           }
         }while(true);
 
-        
-
         //repairdate validation
         do{
           System.out.print("Enter the date for repair in the format MM/DD/YY: ");
 
           try{
             repairdate = in.readLine();
-            if(roomtype.length() <= 0){
+            if(repairdate.length() <= 0){
               throw new RuntimeException("Invalid input");
             }
             break;
@@ -663,28 +656,7 @@ public class DBProject {
             System.err.println(e.getMessage());
             continue;
           }
-
         } while(true);
-
-        /*
-
-
-        System.out.println("\tADD REPAIR");
-
-        System.out.print("Enter the repairID: ");
-        String repairid = in.readLine();
-
-        System.out.print("Enter the hotelID: ");
-        String hotelid = in.readLine();
-
-        System.out.print("Enter the room number: ");
-        String roomnum = in.readLine();
-
-        System.out.print("Enter the maintenance companyID: ");
-        String companyid = in.readLine();
-
-        System.out.print("Enter the repair date in the format MM/DD/YY: ");
-        String repairdate = in.readLine();*/
 
         String query = "INSERT INTO Repair VALUES (" + repairid + ", " + hotelid + ", " + roomnum + ", " + companyid + ", '" + repairdate + "')";
         esql.executeUpdate(query);
@@ -694,15 +666,11 @@ public class DBProject {
         System.out.print("\tHotel ID: " + hotelid + "\n");
         System.out.print("\tRoom Number: " + roomnum + "\n");
         System.out.print("\tCompany ID: " + companyid + "\n");
-        System.out.print("\tRepair Date: " + repairdate + "\n");
-        //System.out.println(query);
-        
-        //int rowCount = esql.executeQuery(query);
-        //System.out.println ("total row(s): " + rowCount);
+        System.out.print("\tRepair Date: " + repairdate + "\n\n");
+       
       } catch(Exception e){
          System.err.println (e.getMessage());
       }
-
    }//end addRepair
 
   //CHOICE 5 - DONE
