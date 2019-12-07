@@ -1071,18 +1071,51 @@ public class DBProject {
       // ...
       // ...
     try {
-      System.out.print("Enter the booking date: ");
-      String bookingdate = in.readLine();
 
-      System.out.print("Enter the hotelid: ");
-      String hotelid = in.readLine();
+      String bookingdate;
+      int hotelid;
+
+      System.out.println(
+         "\n\n*******************************************************\n" +
+         "              LIST HOTEL BOOKINGS FOR A WEEK                \n" +
+         "*******************************************************\n");
+
+      //booking date validation
+      do {
+        System.out.print("Enter the date of the booking in the format MM/DD/YY: ");
+        try {
+          bookingdate = in.readLine();
+          if(bookingdate.length() <= 0) {
+            throw new RuntimeException("Invalid input");
+          }
+          break;
+        } catch(Exception e){
+          System.err.println (e.getMessage());
+          continue;
+        }
+      } while(true);
+
+      //hotelid validation
+      do {
+        System.out.print("Enter the hotelID number: ");
+        try {
+          hotelid = Integer.parseInt(in.readLine());
+          break;
+        } catch(Exception e){
+         System.err.println (e.getMessage());
+         continue;
+        }
+      } while(true);
+
+      System.out.print("\n\tRESULTS\n");
+      System.out.print("-----------------------\n");
+
 
       String query = "SELECT B.roomNo FROM Booking B WHERE (B.bookingDate BETWEEN \'" + bookingdate + "\' AND DATE \'" + bookingdate + "\' + INTERVAL \'1 week\') AND B.hotelID = " + hotelid + " GROUP BY B.roomNo";
-      
-      System.out.println(query);
 
-      int rowCount = esql.executeQuery(query);
-      System.out.println("total row(s): " + rowCount);  
+      esql.executeQuery(query);
+      System.out.print("\n\n");
+        
 
     } catch(Exception e){
          System.err.println (e.getMessage());
