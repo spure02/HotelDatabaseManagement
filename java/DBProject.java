@@ -840,20 +840,14 @@ public class DBProject {
     //CHOICE 6 - DONE
    public static void assignHouseCleaningToRoom(DBProject esql){
     // Given Staff SSN, HotelID, roomNo Assign the staff to the room 
-      // Your code goes here.
-      // ...
-      // ...
       try {
-
           int staffid;
           int hotelid;
           int roomnum;
 
-
-
           System.out.println(
           "\n\n*******************************************************\n" +
-          "              ASSIGN THE HOUSE CLEANING STAFF TO A ROOM                     \n" +
+          "       ASSIGN THE HOUSE CLEANING STAFF TO A ROOM                     \n" +
           "*******************************************************\n");
 
           //staffid validation
@@ -892,7 +886,6 @@ public class DBProject {
             }
           } while(true);
 
-
           //getting the next assigned id
           String getassignedid = "(SELECT MAX(asgID) FROM Assigned)";
           Statement stmt = esql._connection.createStatement();
@@ -900,11 +893,8 @@ public class DBProject {
           rs.next();
           int assignedid = rs.getInt(1) + 1;
 
-
           String query = "INSERT INTO Assigned VALUES (" + assignedid + ", "  + staffid + ", " + hotelid + ", " + roomnum + ")";
-          //System.out.println(query);
           esql.executeUpdate(query);
-
 
           System.out.print("\nSuccessfully assigned house cleaning staff to room:\n");
           System.out.print("\tAssigned ID: " + assignedid + "\n");
@@ -912,14 +902,11 @@ public class DBProject {
           System.out.print("\tHotel ID: " + hotelid + "\n");
           System.out.print("\tRoom Number: " + roomnum + "\n");
 
-          //int rowCount = esql.executeQuery(query);
-          //System.out.println ("total row(s): " + rowCount);
       } catch(Exception e){
          System.err.println (e.getMessage());
       }
    }//end assignHouseCleaningToRoom
-   
-   
+      
    //CHOICE 7 - DONE
    public static void repairRequest(DBProject esql){
     // Given a hotelID, Staff SSN, roomNo, repairID , date create a repair request in the DB
