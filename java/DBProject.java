@@ -1186,24 +1186,71 @@ public class DBProject {
       // Your code goes here. 
 
       try {
-         System.out.println("\tTOP K HIGHEST PRICE BOOKINGS FOR A CUSTOMER");
 
-         System.out.print("Enter the customer's first name: ");
-         String firstname = in.readLine();
+        String firstname;
+        String lastname;
+        int k;
 
-         System.out.print("Enter the customer's last name: ");
-         String lastname = in.readLine();
+        System.out.println(
+         "\n\n*******************************************************\n" +
+         "         TOP K HIGHEST PRICE BOOKINGS FOR A CUSTOMER           \n" +
+         "*******************************************************\n");
 
-         System.out.print("How many entries would you like to see?: ");
-         String k = in.readLine();
 
-         String query = "SELECT B.price, B.bID FROM Customer C, Booking B WHERE C.fName = '" + firstname + "' AND C.lName = '" + lastname + "' AND C.customerID = B.customer ORDER BY B.price DESC LIMIT " + k;
-         System.out.println(query);
+        //first name validation
+        do {
+          System.out.print("Enter the first name of the customer: ");
+          try {
+            firstname = in.readLine();
+            if(firstname.length() <= 0 || firstname.length() > 30) {
+              throw new RuntimeException("Invalid input");
+            }
+            break;
+          } catch(Exception e){
+            System.err.println (e.getMessage());
+            continue;
+          }
+        } while(true);
 
-         int rowCount = esql.executeQuery(query);
-         System.out.println ("total row(s): " + rowCount);
+        //last name validation
+        do {
+          System.out.print("Enter the last name of the customer: ");
+          try {
+            lastname = in.readLine();
+            if(lastname.length() <= 0 || lastname.length() > 30) {
+              throw new RuntimeException("Invalid input");
+            }
+            break;
+          } catch(Exception e){
+            System.err.println (e.getMessage());
+            continue;
+          }
+        } while(true);
+
+        //k value validation
+        do {
+          System.out.print("Enter the k number: ");
+          try {
+            k = Integer.parseInt(in.readLine());
+            break;
+          } catch(Exception e){
+           System.err.println (e.getMessage());
+           continue;
+          }
+        } while(true);
+
+
+        System.out.print("\n\tRESULTS\n");
+        System.out.print("-----------------------\n");
+
+        String query = "SELECT B.price, B.bID FROM Customer C, Booking B WHERE C.fName = '" + firstname + "' AND C.lName = '" + lastname + "' AND C.customerID = B.customer ORDER BY B.price DESC LIMIT " + k;
+        
+        esql.executeQuery(query);
+
+        System.out.print("\n\n");
+        
       } catch(Exception e){
-         System.err.println (e.getMessage());
+        System.err.println (e.getMessage());
       }
       
    }//end topKHighestPriceBookingsForACustomer
