@@ -4,7 +4,7 @@
 - [Introduction](#introduction)
 - [Implementation](#implementation)
 - [Functions and Queries](#functions-and-queries)
-- [Input And Error Validation](#input-and-error-validation)
+- [Input and Error Validation](#input-and-error-validation)
 
 ## Introduction
 The hotel database managament system is a DBMS which tracks different information about different hotels, such as the rooms they own, the maintenance of the rooms, the managers they employ, the bookings their customers make, and information about customers that the hotel services. The system features a simple and user-friendly text-based user interface. When run, the user is greeted to a menu which includes a variety of options. The user is able to select an option with a numeric value (1-17) with option 17 exiting the system. If options 1-16 are selected, the user is able to follow the on screen instructions based on whichever option they chose. Once the user has followed all instructions, they are greeted back to the main menu. This repeats until the user exits out of the system.
