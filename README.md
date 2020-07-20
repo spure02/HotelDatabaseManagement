@@ -1,5 +1,5 @@
 # Hotel Database Management System
-###Team Members
+### Team Members
 - [Simi Purewal](https://github.com/spure02)
 - [Kinjal Mugatwala](https://github.com/kmuga001)
 
