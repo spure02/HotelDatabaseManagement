@@ -90,8 +90,8 @@ We also added a unique validation into the repairRequest function. Since only a 
 
 
 ## Project Collaboration
-- Since there are 16 functions total to write, we split up the work evenly so we worked on 8 functions each. Kinjal worked on the even numbered queries and Simran worked on the odd numbered queries.
-- Since Kinjal’s laptop was having problems with PostgreSQL, we worked together to make sure that each of our individual codes ran properly on Simran’s laptop. 
+- Since there are 16 functions total to write, we split up the work evenly so we worked on 8 functions each. Kinjal worked on the even numbered queries and Simi worked on the odd numbered queries.
+- Since Kinjal’s laptop was having problems with PostgreSQL, we worked together to make sure that each of our individual codes ran properly on Simi's laptop. 
 - We also created a GitHub repository to work on input validation because we were unable to meet up to complete this aspect of the project. 
 
 ## Problems Faced and Solved
