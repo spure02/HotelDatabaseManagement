@@ -1,18 +1,22 @@
 # Hotel Database Management System
+###Team Members
+- [Simi Purewal](https://github.com/spure02)
+- [Kinjal Mugatwala](https://github.com/kmuga001)
 
-### Table of Contents
+
+## Table of Contents
 - [Introduction](#introduction)
 - [Implementation](#implementation)
 - [Functions and Queries](#functions-and-queries)
 - [Input and Error Validation](#input-and-error-validation)
 
-## Introduction
+### Introduction
 The hotel database managament system is a DBMS which tracks different information about different hotels, such as the rooms they own, the maintenance of the rooms, the managers they employ, the bookings their customers make, and information about customers that the hotel services. The system features a simple and user-friendly text-based user interface. When run, the user is greeted to a menu which includes a variety of options. The user is able to select an option with a numeric value (1-17) with option 17 exiting the system. If options 1-16 are selected, the user is able to follow the on screen instructions based on whichever option they chose. Once the user has followed all instructions, they are greeted back to the main menu. This repeats until the user exits out of the system.
 
-## Implementation
+### Implementation
 The client application was created using Java Database Connector (JDBC), and the specific queries were coded in PostgreSQL. We stored our queries into a String datatype which we passed to the JDBC functions in order to execute our queries.
 
-## Functions and Queries
+### Functions and Queries
 - addCustomer
   - This function adds a new customer to the database. It will ask for the customer ID, the customer’s first and last name, the customer’s address, the customer’s phone number, the customer’s date of birth, and the customer’s gender (male, female, or other). We then use a simple INSERT query to insert these user values into the database.
 
@@ -60,7 +64,7 @@ This function lists all the booked rooms in the database within a week based on 
 - numberOfRepairsForEachRoomPerYear
   - This function lists the number of repairs for each room per year based on the hotel ID and room number. The system will ask the user for an existing hotel ID and existing room number. Then, we use a SELECT query to get the number of repair for each room using the  year portion of the repair date, the hotel ID, and the room number.
 
-## Input and Error Validation
+### Input and Error Validation
 Since we prompt the user to ask for multiple inputs, we used a variety of checks to validate these inputs and possible errors that we came across. For each String datatype, we checked the length of the input if it exceeds the maximum length as stated in the create.sql file. For first and last names, and company names,  we made sure the user input cannot be less than or equal to 0 (to check for empty inputs) or greater than 30 (the maximum string length). For roomType in the Room table and repairType in the Repair table, we made sure the user input cannot be less than or equal to 0 (to check for empty inputs) or greater than 10 (the maximum string length). Numeric datatype values we checked for negative number input and also for empty number input. For the Date datatype values, since there is no maximum limit, we treated them as String datatypes and made sure the input cannot be less than or equal to 0 (to check for empty inputs).
 
 We also added a unique validation into the repairRequest function. Since only a manager can make a repair request, we have to validate that the user is a manager. Once the user chooses the repairRequest option, the system immediately prompts the user for the staff ID. We validate this input with a new query to check if this staff ID exists in the Staff table, and if this staff ID corresponds to a Manager staffRole. If this staff ID does exist and if it also corresponds to a Manager staffRole, then the user will be able to add a repair request. If it does not exist, then the system will throw an error asking for a valid staff ID and the user will stay at that prompt window.
